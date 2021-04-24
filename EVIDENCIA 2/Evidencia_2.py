@@ -136,11 +136,6 @@ while switch:
                 _detalle = consulta['Detalles/Conceptos'][i]
                 print (f"{_folio}\t\t{_fecha}\t{_detalle}")
                 print("\n")
-        else:
-
-            # Si el id que ingreso el usuario no existe en nuestra base de...
-            # registros, mostraremos el siguiente mensaje
-            print("El id o folio de venta ingresado, no existe en los registros")
 
     elif opcion == 3:
         # La siguiente consulta hace practicamente lo mismo que la anterior...
@@ -160,12 +155,6 @@ while switch:
                 _total = consulta['Total pagado'][i]
                 print (f"{_folio}\t\t{_fecha}\t{_detalle}\t\t{_total}")
                 print("\n")
-        else:
-
-            # si no hay una venta con la fehca que el usuario ingreso...
-            # mostraremos el siguiente mensaje
-            print("No existe una venta con esa fehca")
-            print("\n")
 
     elif opcion == 4:
         break
