@@ -69,6 +69,7 @@ while switch:
             # No se agrupen con los anteriores
             Base_De_Datos = []
             Ventas = []
+            lista_totales = []
             _base_venta = []
 
         else:
@@ -109,6 +110,7 @@ while switch:
 
             Base_De_Datos = []
             Ventas = []
+            lista_totales = []
             _base_venta = []
 
     elif opcion == 2:
@@ -119,7 +121,7 @@ while switch:
         # Pedimos al usuario el id de venta que desea consultar
         folio_buscar = int(input("Folio o No. de venta a buscar: "))
         print("\n")
-        print("Folio de Venta\tFecha\t\tDetalle")
+        print("Folio de Venta\tFecha\t\tDetalle\t\t\t\t\t\t\t\t\t\tTotal")
 
         # El siguiente ciclo lo que hara es que iterara cada linea de nuestro dataframe...
         # y nos devolvera los valores de la columna que le mandemos a llamar
@@ -134,7 +136,8 @@ while switch:
                 _folio = consulta['Folio de Venta'][i]
                 _fecha = consulta['FechaVenta'][i]
                 _detalle = consulta['Detalles/Conceptos'][i]
-                print (f"{_folio}\t\t{_fecha}\t{_detalle}")
+                _total = consulta['Total pagado'][i]
+                print (f"{_folio}\t\t{_fecha}\t{_detalle}\t\t{_total}")
                 print("\n")
 
     elif opcion == 3:
