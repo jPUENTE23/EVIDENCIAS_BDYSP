@@ -14,16 +14,15 @@ while True:
     print("[0]. Crear Base de Datos")
     print("[1]. Dar de alta empleado")
     print("[2]. Registrar venta")
-    print("[3]. Consultar venta por folio")
-    print("[4]. Consultar venta por fecha")
-    print("[5]. Salir")
+    print("[3]. Consultar venta por fecha")
+    print("[4]. Salir")
     opcion = int(input("Opcion: "))
     if opcion == 0:
         try:
             with sqlite3.connect("DB_NEGOCIO.db") as conn:
                 cursor = conn.cursor()
 
-                cursor.execute("CREATE TABLE EMPLEADO (IdEmpleado INTEGER PRIMARY KEY NOT NULL,Nombre TEXT NOT NULL, APaterno TEXT NOT NULL, AMaterno TEXT NOT NULL, EStatus    VARCHAR NOT NULL);")
+                cursor.execute("CREATE TABLE EMPLEADO (IdEmpleado INTEGER PRIMARY KEY NOT NULL,Nombre TEXT NOT NULL, APaterno TEXT NOT NULL, AMaterno TEXT NOT NULL, EStatus VARCHAR NOT NULL);")
 
                 cursor.execute("CREATE TABLE VENTA (IdVenta INTEGER PRIMARY KEY NOT NULL,Fecha TIMESTAMP NOT NULL, TotalVenta INTEGER NOT NULL, IdEmpleado INTEGER REFERENCES EMPLEADO (IdEmpleado) NOT NULL);")
 
@@ -154,8 +153,12 @@ while True:
                             print("\n")
 
                             Base_De_Datos = []
-                            Ventas = []
+                            venta = []
                             _base_venta = []
+                            _concepto = []
+                            lista_totales = []
+                            conceptos = []
+
 
                             break
 
@@ -172,41 +175,6 @@ while True:
             print("Debe ejecutar la opcion 0 para tener acceso a este apartado")
 
     elif opcion == 3:
-        if os.path.isfile("DB_NEGOCIO.db"):
-            try:
-                while True:
-                    with sqlite3.connect("DB_NEGOCIO.db") as conn:
-                        cursor = conn.cursor()
-
-                        id_consultar = int(input("Id de la venta a consultar: "))
-                        dato_consulta = {"Id":id_consultar}
-                        cursor.execute("SELECT VENTA.IdVenta, VENTA.Fecha, VENTA_DETALLE.Concepto, VENTA.TotalVenta FROM VENTA INNER JOIN VENTA_DETALLE ON VENTA.IdVenta = VENTA_DETALLE.IdVenta WHERE VENTA.IdVenta = :Id",dato_consulta)
-                        consulta = cursor.fetchall()
-                        print("\n")
-
-                        print("Folio de Venta\tFecha\t\tDetalle\t\t\t\t\t\t\t\t\t\tTotal")
-
-                        if consulta:
-                            for folio, fecha, concepto, total in consulta:
-                                print (f"{folio}\t\t{fecha}\t{concepto}\t\t{total}")
-                                print("\n")
-
-                        else:
-                            print("El Id de venta ingresado no existe. Intente nuevamente")
-                            print("\n")
-
-                        break
-
-            except Error as e:
-                print (e)
-            except:
-                print(f"Se produjo el siguiente error: {sys.exc_info()[0]}")
-
-        else:
-            print("Debe ejecutar la opcion 0 para tener acceso a este apartado")
-
-
-    elif opcion == 4:
         if os.path.isfile("DB_NEGOCIO.db"):
             try:
                 while True:
@@ -230,6 +198,7 @@ while True:
 
                             _totalConsulta = sum(total_Consulta)
                             print("El total vendido de la fecha consultada es de: {}".format(float(_totalConsulta)))
+                            total_Consulta = []
 
                         else:
                             print("No hay una venta existente con esa fecha. Intenta con otra")
@@ -245,5 +214,5 @@ while True:
         else:
             print("Debe ejecutar la opcion 0 para tener acceso a este apartado")
 
-    elif opcion == 5:
+    elif opcion == 4:
         break
