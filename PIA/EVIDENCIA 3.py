@@ -199,12 +199,14 @@ while True:
                             _totalConsulta = sum(total_Consulta)
                             print("El total vendido de la fecha consultada es de: {}".format(float(_totalConsulta)))
                             total_Consulta = []
+                            print("\n")
+
+                            break
 
                         else:
                             print("No hay una venta existente con esa fecha. Intenta con otra")
                             print("\n")
 
-                        break
 
             except Error as e:
                 print (e)
