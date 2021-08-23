@@ -75,6 +75,8 @@ while True:
                             print("---Datos procesados correctamente---")
                             print("\n")
 
+                            break
+
             except Error as e:
                 print (e)
             except:
@@ -180,7 +182,7 @@ while True:
                 while True:
                     with sqlite3.connect("DB_NEGOCIO.db") as conn:
                         cursor = conn.cursor()
-                        fecha_buscar = input("Ingrese la fecha a consultar (dd/mm/aa): ")
+                        fecha_buscar = input("Ingrese la fecha a consultar (dd/mm/aaaa): ")
                         _fechaprocesada = datetime.datetime.strptime(fecha_buscar, "%d/%m/%Y").date()
                         consulta_fecha = {"Fecha":_fechaprocesada}
                         cursor.execute("SELECT VENTA.IdVenta, VENTA.Fecha, VENTA_DETALLE.Concepto, VENTA.TotalVenta FROM VENTA INNER JOIN VENTA_DETALLE ON VENTA.IdVenta = VENTA_DETALLE.IdVenta WHERE  VENTA.Fecha= :Fecha",consulta_fecha)
